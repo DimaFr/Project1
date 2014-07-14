@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>my01 manual</title>
+    <script src="../../components/angular/angular.js"></script>
+    <script>
+        angular.module('app',[])
+                .run(function($rootScope){
+                    $rootScope.msg="Module up!"
+                })
+        function init(){
+            angular.bootstrap(document,['app']);
+        }
+    </script>
+</head>
+<body onload="init()">
+<h1>Angular {{msg}}</h1>
+</body>
+</html>
