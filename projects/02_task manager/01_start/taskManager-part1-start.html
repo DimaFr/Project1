@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="../../../components/bootstrap/dist/css/bootstrap.css"/>
     <link rel="stylesheet" href="skin.css"/>
 
+    <script src="../../../components/angular/angular.min.js"></script>
+    <script src="taskManager-part1-start.js"></script>
+
 </head>
 
-<body ng-controller="MainController">
+<body ng-controller="TaskMangerController">
 
 <div class="container">
 
@@ -30,7 +33,8 @@
 
             </div>
         </div>
-    </section><!-- /action bar -->
+    </section>
+    <!-- /action bar -->
 
     <div class="row">
 
@@ -42,7 +46,8 @@
                 <li><samp>24/6/14 13:05 - task removed</samp></li>
                 <li><samp>28/6/14 13:05 - task removed</samp></li>
             </ul>
-        </div> <!-- /task log -->
+        </div>
+        <!-- /task log -->
 
         <!-- task table -->
         <div class="col-lg-7" ng-controller="TaskTableController">
@@ -57,79 +62,82 @@
                 </thead>
                 <tbody>
 
-                <tr ng-repeat="task in scope.tasks">
-                    <td class="text-center"><input class="input" ng-model="task.checked" type="checkbox"/></td>
-                    <td ng-model="task.title">learn angular!</td>
-                    <td ng-model="task.desciption">start from scratch, build your skills</td>
+                <tr ng-repeat="task in tasks">
+                    <td class="text-center"><input ng-change="updateWithTask(task)" ng-model="task.checked" class="input" type="checkbox"/></td>
+                    <td ng-class='{stryke:task.checked}'>{{task.title}}</td>
+                    <td ng-class='{stryke:task.checked}'>{{task.description}}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
-                            <button class="btn btn-danger">
+                            <button ng-click="removeTask(task)" class="btn btn-danger">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
-                            <button class="btn btn-primary">
+                            <button ng-click="editTask(task)" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-edit"></span>
                             </button>
                         </div>
                     </td>
                 </tr>
 
-                <tr class="tr-active">
-                    <td class="text-center"><input class="input" type="checkbox" checked/></td>
-                    <td>play with controllers!</td>
-                    <td>make sure to understand whats going on</td>
-                    <td>
-                        <div class="btn-group btn-group-sm">
-                            <button class="btn btn-danger">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                            <button class="btn btn-primary">
-                                <span class="glyphicon glyphicon-edit"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                <!--<tr class="tr-active">-->
+                <!--<td class="text-center"><input class="input" type="checkbox" checked/></td>-->
+                <!--<td>play with controllers!</td>-->
+                <!--<td>make sure to understand whats going on</td>-->
+                <!--<td>-->
+                <!--<div class="btn-group btn-group-sm">-->
+                <!--<button class="btn btn-danger">-->
+                <!--<span class="glyphicon glyphicon-remove"></span>-->
+                <!--</button>-->
+                <!--<button class="btn btn-primary">-->
+                <!--<span class="glyphicon glyphicon-edit"></span>-->
+                <!--</button>-->
+                <!--</div>-->
+                <!--</td>-->
+                <!--</tr>-->
 
-                <tr>
-                    <td class="text-center"><input class="input" type="checkbox"/></td>
-                    <td>try bootstrap</td>
-                    <td>prototype a gui is easy</td>
-                    <td>
-                        <div class="btn-group btn-group-sm">
-                            <button class="btn btn-danger">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                            <button class="btn btn-primary">
-                                <span class="glyphicon glyphicon-edit"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                <!--<tr>-->
+                <!--<td class="text-center"><input class="input" type="checkbox"/></td>-->
+                <!--<td>try bootstrap</td>-->
+                <!--<td>prototype a gui is easy</td>-->
+                <!--<td>-->
+                <!--<div class="btn-group btn-group-sm">-->
+                <!--<button class="btn btn-danger">-->
+                <!--<span class="glyphicon glyphicon-remove"></span>-->
+                <!--</button>-->
+                <!--<button class="btn btn-primary">-->
+                <!--<span class="glyphicon glyphicon-edit"></span>-->
+                <!--</button>-->
+                <!--</div>-->
+                <!--</td>-->
+                <!--</tr>-->
 
                 </tbody>
             </table>
-        </div><!-- /task table -->
+        </div>
+        <!-- /task table -->
 
         <!-- task form -->
-        <div class="col-lg-2">
+        <div class="col-lg-2" ng-controller="TaskFormController">
 
             <form class="form-horizontal">
 
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Title">
+                    <input ng-model ="task.title" type="text" class="form-control" placeholder="Title">
                 </div>
 
                 <div class="form-group">
-                    <textarea rows="6" class="form-control" placeholder="Description"></textarea>
+                    <textarea ng-model ="task.description" rows="6" class="form-control" placeholder="Description"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <button class="form-control btn btn-primary">Add</button>
+                    <button ng-click="addTask(task)" class="form-control btn btn-primary">Add</button>
                 </div>
             </form>
-        </div><!-- /task form -->
+        </div>
+        <!-- /task form -->
 
     </div>
-</div><!-- /container-->
+</div>
+<!-- /container-->
 
 </body>
 
