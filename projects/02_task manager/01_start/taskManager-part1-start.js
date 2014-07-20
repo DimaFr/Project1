@@ -22,13 +22,19 @@
                 timeStamp: new Date(),
                 msg: "task added"
             });
+//            LogProvider.printLog(msg);
         });
         scope.$on('deleteTask', function () {
             scope.logs.push({
                 timeStamp: new Date(),
                 msg: "task removed"
             });
-        })
+//            LogProvider.printLog(msg);
+        });
+        scope.deleteLogs = function () {
+            scope.logs = [];
+//            LogProvider.printLog("logs were deleted");
+        };
 
     }
 
@@ -77,6 +83,7 @@
             }
         );
     }
+
     /*
      SERVICES
      */
@@ -99,12 +106,12 @@
         var DataService = {
             saveTasks: _saveTasks,
             tasks: _model
-        }
+        };
         return DataService;
     }
 
     /*
-     SERVICE
+     ALTERNATIVE SERVICE
      */
 //    function DataService() {
 //        this.saveTasks = function (model) {
@@ -117,9 +124,50 @@
 //
 //        this.tasks = this.loadTasks() || [];
 //    }
+    /*
+     LOG FACTORY
+     */
+    function LogService() {
+        var _model = _loadTasks() || [];
+        var _saveLogs = function (model) {
+            localStorage.dataService = angular.toJson(model);
+        };
+
+        function _loadLogs() {
+            //return saved data or empty array
+            _model = angular.fromJson(localStorage.dataService);
+            return _model;
+        };
+        var LogService = {
+            saveLogs: _saveLogs,
+            logs: _model
+        };
+        return LogService;
+    }
+
+
+//    function LogProvider($log) {
+//
+//        this.printLogsFlag = true;
+//        this.$get = function () {
+//            var _printLogsFlag = this.printLogsFlag;
+//            return {
+//                printLog: function (msg) {
+//                    if (_printLogsFlag) {
+//                        var timeStamp = new Date();
+//                        $log.debug(timeStamp + " - " + msg);
+//                    }
+//                }
+//            }
+//
+//        }
+//    }
 
 
     angular.module('TaskManager', [])
+//        .config(function(LogServiceProvider){
+//            this.printLogsFlag=true;
+//        })
         .controller({
             'MainController': ['$scope', mainController],
             'TaskTableController': ['$scope', 'DataService', taskTableController],
@@ -129,7 +177,7 @@
 
         })
         .service('DataService', DataService)
-    //  .provider('LogProvider', LogProvider)
+       // .provider('$log','LogService', LogProvider)
 
 
 })
