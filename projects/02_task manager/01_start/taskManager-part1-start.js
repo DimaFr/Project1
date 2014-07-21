@@ -84,6 +84,7 @@
         );
     }
 
+
     /*
      SERVICES
      */
@@ -130,38 +131,20 @@
     function LogService() {
         var _model = _loadTasks() || [];
         var _saveLogs = function (model) {
-            localStorage.dataService = angular.toJson(model);
+            localStorage.logService = angular.toJson(model);
         };
 
         function _loadLogs() {
             //return saved data or empty array
-            _model = angular.fromJson(localStorage.dataService);
+            _model = angular.fromJson(localStorage.logService);
             return _model;
-        };
+        }
         var LogService = {
             saveLogs: _saveLogs,
             logs: _model
         };
         return LogService;
     }
-
-
-//    function LogProvider($log) {
-//
-//        this.printLogsFlag = true;
-//        this.$get = function () {
-//            var _printLogsFlag = this.printLogsFlag;
-//            return {
-//                printLog: function (msg) {
-//                    if (_printLogsFlag) {
-//                        var timeStamp = new Date();
-//                        $log.debug(timeStamp + " - " + msg);
-//                    }
-//                }
-//            }
-//
-//        }
-//    }
 
 
     angular.module('TaskManager', [])
@@ -174,10 +157,9 @@
             'AddTaskController': ['$scope', 'DataService', addTaskController],
             'LogController': ['$scope', logController]
 
-
         })
-        .service('DataService', DataService)
-       // .provider('$log','LogService', LogProvider)
+        .factory('DataService',DataService)
+
 
 
 })
