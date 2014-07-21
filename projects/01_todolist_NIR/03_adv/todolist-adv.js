@@ -21,13 +21,13 @@ function ListController($scope, StorageService) {
                 completed: task.completed
             });
         }
-        StorageService.saveTasks($scope.tasks);
+        StorageService.saveData($scope.tasks);
         $scope.task = {};
     };
 
     $scope.removeTask = function (t) {
         $scope.tasks.splice($scope.tasks.indexOf(t), 1);
-        StorageService.saveTasks($scope.tasks);
+        StorageService.saveData($scope.tasks);
     };
 
     $scope.editTask = function (t) {
