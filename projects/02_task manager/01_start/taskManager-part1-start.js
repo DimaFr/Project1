@@ -15,25 +15,33 @@
         });
     }
 
-    function logController(scope) {
+    function logController(scope,LogManager) {
         scope.logs = [];
+
+        scope.refreshLogs=function(){
+            scope.logs = LogManager.logs;
+        };
         scope.$on('newTask', function () {
-            scope.logs.push({
+            var eventLog ={
                 timeStamp: new Date(),
                 msg: "task added"
-            });
-//            LogProvider.printLog(msg);
+            };
+            LogManager.saveLogs(eventLog);
+            scope.refreshLogs();
+
         });
         scope.$on('deleteTask', function () {
-            scope.logs.push({
+            var eventLog ={
                 timeStamp: new Date(),
-                msg: "task removed"
-            });
-//            LogProvider.printLog(msg);
+                msg: "task deleted"
+            };
+            LogManager.saveLogs(eventLog);
+            scope.refreshLogs();
         });
         scope.deleteLogs = function () {
             scope.logs = [];
-//            LogProvider.printLog("logs were deleted");
+            console.log('logs were deleted')
+
         };
 
     }
@@ -84,31 +92,10 @@
         );
     }
 
+
     /*
      SERVICES
      */
-    /*
-     FACTORY
-     */
-
-    function DataService() {
-        var _model = _loadTasks() || [];
-        var _saveTasks = function (model) {
-            localStorage.dataService = angular.toJson(model);
-        };
-
-        function _loadTasks() {
-            //return saved data or empty array
-            _model = angular.fromJson(localStorage.dataService);
-            return _model;
-        }
-
-        var DataService = {
-            saveTasks: _saveTasks,
-            tasks: _model
-        };
-        return DataService;
-    }
 
     /*
      ALTERNATIVE SERVICE
@@ -124,60 +111,21 @@
 //
 //        this.tasks = this.loadTasks() || [];
 //    }
-    /*
-     LOG FACTORY
-     */
-    function LogService() {
-        var _model = _loadTasks() || [];
-        var _saveLogs = function (model) {
-            localStorage.dataService = angular.toJson(model);
-        };
 
-        function _loadLogs() {
-            //return saved data or empty array
-            _model = angular.fromJson(localStorage.dataService);
-            return _model;
-        };
-        var LogService = {
-            saveLogs: _saveLogs,
-            logs: _model
-        };
-        return LogService;
-    }
-
-
-//    function LogProvider($log) {
-//
-//        this.printLogsFlag = true;
-//        this.$get = function () {
-//            var _printLogsFlag = this.printLogsFlag;
-//            return {
-//                printLog: function (msg) {
-//                    if (_printLogsFlag) {
-//                        var timeStamp = new Date();
-//                        $log.debug(timeStamp + " - " + msg);
-//                    }
-//                }
-//            }
-//
-//        }
-//    }
 
 
     angular.module('TaskManager', [])
-//        .config(function(LogServiceProvider){
-//            this.printLogsFlag=true;
-//        })
+//       .config(function(LogManager){
+//            this.printToConsoleEnabled(true);
+//       })
         .controller({
             'MainController': ['$scope', mainController],
             'TaskTableController': ['$scope', 'DataService', taskTableController],
             'AddTaskController': ['$scope', 'DataService', addTaskController],
-            'LogController': ['$scope', logController]
-
-
+            'LogController': ['$scope','LogManager', logController]
         })
-        .service('DataService', DataService)
-       // .provider('$log','LogService', LogProvider)
+
+
 
 
 })

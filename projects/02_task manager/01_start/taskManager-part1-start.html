@@ -5,9 +5,9 @@
     <title></title>
 
     <link rel="stylesheet" href="../../../components/bootstrap/dist/css/bootstrap.css"/>
-    <link rel="stylesheet" href="skin.css"/>
+    <link rel="stylesheet" href="css/skin.css"/>
     <script src="../../../components/angular/angular.min.js"></script>
-    <script src="taskManager-part1-start.js"></script>
+
 
 </head>
 
@@ -72,7 +72,7 @@
                     <td class="text-center"><input ng-change="updateWithTask(task)" ng-model="task.checked"
                                                    class="input" type="checkbox"/></td>
                     <td ng-class='{stryke:task.checked}'>{{task.title}}</td>
-                    <td ng-class='{stryke:task.checked}'>{{task.description}}</td>
+                    <td ng-class='{stryke:task.checked}'>{{task.description|truncate:60}}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
                             <button ng-click="removeTask(task)" class="btn btn-danger">
@@ -113,7 +113,9 @@
     </div>
 </div>
 <!-- /container-->
-
+<script src="taskManager-part1-start.js"></script>
+<script src="filters/truncate.filter.js"></script>
+<script src="services/taskManager.services.js"></script>
 </body>
 
 </html>
