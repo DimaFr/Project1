@@ -64,5 +64,26 @@
         }
     });
 
+    app.directive('dfInclude', function ($http) {
+        return {
+            compile: function (tElement, tAttr) {
+                console.log(tAttr)
+                return {
+                    pre: function (scope, e, att) {
+                        //scope.eval(att.dfInclude);
+                    },
+                    post: function (scope, e, att) {
+                        console.log(att.dfInclude);
+                        console.log(e);
+
+                          console.log(e.load('include.html'));
+
+
+                    }
+                }
+            }
+        }
+    });
+
 
 }())

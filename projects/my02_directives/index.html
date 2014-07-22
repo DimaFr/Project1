@@ -9,10 +9,11 @@
 </head>
 <body>
 
-<div df-init="showme = false">
+<div class="container"  df-init="showme = false">
 
     <button df-click="showme=!showme" class="btn btn-primary">Show</button>
-    <div df-show="showme">
+    <div  df-show="showme">
+        <div df-include="'include.html'"></div>
         <h3> Toggled Text</h3>
     </div>
 </div>
