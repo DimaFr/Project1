@@ -70,15 +70,13 @@
                 console.log(tAttr)
                 return {
                     pre: function (scope, e, att) {
-                        //scope.eval(att.dfInclude);
+
                     },
                     post: function (scope, e, att) {
-                        console.log(att.dfInclude);
-                        console.log(e);
-
-                          console.log(e.load('include.html'));
-
-
+                            $http.get(att.dfInclude).then(function(result){
+                                e.append(result.data);
+                                console.log(result.data)
+                            });
                     }
                 }
             }
