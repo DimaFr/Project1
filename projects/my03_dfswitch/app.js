@@ -19,7 +19,7 @@
                         if (value) {
 //unhide relevant
 
-                            dfSwitchController.cases = value;
+                           // dfSwitchController.cases = value;
                             console.log("Case: " + dfSwitchController.cases);
 
                         }

@@ -18,6 +18,25 @@
     </div>
 </div>
 
+<div class="container">
+
+<div>Select an option</div>
+
+<select ng-model='option'>
+    <option value='a'>Option A</option>
+    <option value='b'>Option B</option>
+    <option value='c'>Option C</option>
+</select>
+
+<div ng-switch='option'>
+
+    <div ng-switch-when='a'>This is option A</div>
+    <div ng-switch-when='b'>This is option B</div>
+    <div ng-switch-when='c'>This is option C</div>
+    <div ng-switch-default>This is default option</div>
+
+</div>
+</div>
 
 </body>
 </html>
