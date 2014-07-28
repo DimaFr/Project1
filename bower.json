@@ -1,0 +1,23 @@
+{
+    "name": "500Tech Project1",
+    "version": "0.0.1",
+    "homepage": "#",
+    "authors": [
+        "Dimitry Friedman"
+    ],
+    "description": "starter project with testing",
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular": "~1.2.19",
+        "angular-mocks": "~1.2.19",
+        "bootstrap": "~3.2.0"
+    }
+}

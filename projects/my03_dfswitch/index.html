@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>DF Switch</title>
+    <link rel="stylesheet" href="../../components/bootstrap/dist/css/bootstrap.min.css"/>
+    <script src="../../components/angular/angular.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+<div>Select an option</div>
+
+<select ng-model='option'>
+    <option value='a'>Option A</option>
+    <option value='b'>Option B</option>
+    <option value='c'>Option C</option>
+</select>
+
+<div df-switch='option'>
+
+    <div df-switch-when='a'>This is option A</div>
+    <div df-switch-when='b'>This is option B</div>
+    <div df-switch-when='c'>This is option C</div>
+    <div df-switch-default>This is default option</div>
+
+</div>
+
+</body>
+</html>
