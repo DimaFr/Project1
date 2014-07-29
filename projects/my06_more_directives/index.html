@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app='app' xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../../components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="style.css"/>
+    <script src="../../components/angular/angular.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+<div class="container"><h3>& directive</h3></div>
+<div class="container" ng-controller="MyAmpersandController">
+    <div ng-class="vertical">
+        <div my-ampersand-directive dosmth="doSmth(value)"></div>
+    </div>
+    <div ng-class="vertical">
+        <div my-ampersand-directive dosmth="doSmth(value)"></div>
+    </div>
+</div>
+<div class="container"><h3>= directive</h3></div>
+<div class="container" ng-controller="EqualsController">
+    <div ng-class="vertical">
+        Ctrl</br>
+        <input type="text" ng-model="myFlavor"/></br>
+        Dir</br>
+        <div equal-directive flavor="myFlavor"></div>
+    </div>
+</div>
+
+
+<div class="container"><h3>@ directive</h3></div>
+<div class="container" ng-controller="AtController">
+    <div at-directive flavor="{{myFlavor}}"></div>
+</div>
+<div class="container"><h3>transclude</h3></div>
+<div class="container">
+    <transclude-directive>
+        <div class="btn btn-primary col-xs-offset-5 "> OK </div>
+    </transclude-directive>
+
+
+
+</div>
+
+</body>
+</html>
