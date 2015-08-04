@@ -29,7 +29,7 @@
             localStorage.logService = angular.toJson(model);
         };
 
-        function _loadLogs() {
+        function _loadTasks() {
             //return saved data or empty array
             _model = angular.fromJson(localStorage.logService);
             return _model;
@@ -46,7 +46,7 @@
         this.printToConsoleEnabled= function(flag){
             printEnabled=flag;
         }
-/       this.$get=function(LogService){
+         this.$get=function(LogService){
 //            return {
 //               EventsLogs: LogService.logs,
 //               logEvent: function(eventLog){
@@ -57,7 +57,7 @@
 //                   LogService.saveLogs(this.EventsLogs);
 //               }
 //            }
-            var _model = _loadTasks() || [];
+            var _model = _loadLogs() || [];
             var _saveLogs = function (model) {
                 if(printEnabled){
                   console.log("eventLog");
