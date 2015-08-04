@@ -6,8 +6,13 @@
 
         .directive ('flashLabel',function(){
         return {
-            restrict:"E",
-            template: "<div>This is my label: select one or two images.</div>"
+            restrict:"A",
+            template: "<div ng-show=''>This is my label: select one or two images.</div>",
+            link: function(scope, e, attr, ctrl){
+                alert("here is my label");
+                console.log(attr);
+            }
+
         }
     })
 
